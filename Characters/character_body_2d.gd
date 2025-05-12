@@ -8,7 +8,7 @@ func _physics_process(_delta):
 		Input.get_action_strength("right") - Input.get_action_strength("left"),
 		Input.get_action_strength("down") - Input.get_action_strength("up")
 	)
-	print(input_direction)
+	#print(input_direction)
 	
 	#update velocity
 	velocity = input_direction * move_speed
@@ -19,7 +19,7 @@ func _physics_process(_delta):
 #const SPEED = 300.0
 #const JUMP_VELOCITY = -400.0
 #
-#
+#wasdw
 #func _physics_process(_delta):
 	## Add the gravity.
 	##if not is_on_floor():
