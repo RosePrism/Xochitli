@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://c8ohhpvskok07"]
+
+[ext_resource type="PackedScene" uid="uid://bqs21rdfddw2v" path="res://Characters/character_body_2d.tscn" id="1_xwc32"]
+[ext_resource type="Script" uid="uid://b7hrehge4c07o" path="res://Characters/character_body_2d.gd" id="2_lla2u"]
+
+[node name="Game level" type="Node2D"]
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("1_xwc32")]
+position = Vector2(9, 13)
+script = ExtResource("2_lla2u")
