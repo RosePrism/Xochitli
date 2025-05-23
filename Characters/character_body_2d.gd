@@ -5,7 +5,7 @@ extends CharacterBody2D
 
 enum Direction { LEFT, RIGHT, UP, DOWN}
 var last_direction: Direction = Direction.DOWN
-
+ 
 
 
 func _physics_process(_delta):

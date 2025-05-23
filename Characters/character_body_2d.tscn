@@ -158,10 +158,10 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
-"duration": 1.0,
+"duration": 2.0,
 "texture": SubResource("AtlasTexture_3iilw")
 }, {
-"duration": 1.0,
+"duration": 2.0,
 "texture": SubResource("AtlasTexture_45oxw")
 }],
 "loop": true,
@@ -292,15 +292,17 @@ _data = {
 }
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
+position = Vector2(4, 2)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(9, 9)
+position = Vector2(0, -3)
 sprite_frames = SubResource("SpriteFrames_c472b")
-animation = &"Idle S"
+animation = &"Dash"
 autoplay = "Idle S"
+frame_progress = 0.867324
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(9, 13)
+position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_1wu55")
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
