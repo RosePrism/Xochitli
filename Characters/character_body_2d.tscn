@@ -292,7 +292,6 @@ _data = {
 }
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
-position = Vector2(4, 2)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -3)
