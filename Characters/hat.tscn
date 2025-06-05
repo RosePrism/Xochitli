@@ -1,0 +1,45 @@
+[gd_scene load_steps=7 format=3 uid="uid://v12pwm2l3rpu"]
+
+[ext_resource type="Script" uid="uid://x54dkdlhev27" path="res://scripts/hat.gd" id="1_vvj34"]
+[ext_resource type="Texture2D" uid="uid://c8xvg3gaxikf0" path="res://Assets/XochitliwithhatV1-Sheet.png" id="1_wm1bm"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vvj34"]
+atlas = ExtResource("1_wm1bm")
+region = Rect2(608, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tyujm"]
+atlas = ExtResource("1_wm1bm")
+region = Rect2(640, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_n8thv"]
+animations = [{
+"frames": [{
+"duration": 3.0,
+"texture": SubResource("AtlasTexture_vvj34")
+}, {
+"duration": 3.0,
+"texture": SubResource("AtlasTexture_tyujm")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5p7kl"]
+radius = 6.5192
+
+[node name="Hat" type="Area2D"]
+collision_mask = 2
+script = ExtResource("1_vvj34")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_n8thv")
+autoplay = "default"
+frame_progress = 0.0754536
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 6.5)
+shape = SubResource("CircleShape2D_5p7kl")
+
+[connection signal="area_shape_entered" from="." to="." method="_on_area_shape_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

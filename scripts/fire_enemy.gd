@@ -21,9 +21,9 @@ func _physics_process(_delta):
 	direction_to_player = (player_transform.origin - transform.origin).normalized() # calculate the direction to the player
 	
 	#DEBUG
-	print('enemy location: ' + str(transform.origin))
-	print('player location: ' + str(player_transform.origin))
-	print('direction to player: ' + str(direction_to_player))
+	#print('enemy location: ' + str(transform.origin))
+	#print('player location: ' + str(player_transform.origin))
+	#print('direction to player: ' + str(direction_to_player))
 	
 	match current_state:
 		FLAME_STATE.IDLE:
