@@ -1,5 +1,8 @@
 extends CharacterBody2D
 
+var health = 100
+var is_invincible = false
+
 enum FLAME_STATE { IDLE, AGRO }#if left and right movment i wanted add LEFT and RIGHT states, then coppy what was done with the match
 var detection_range = 100
 
@@ -14,7 +17,15 @@ var direction_to_player : Vector2
 var move_direction : Vector2 = Vector2.ZERO
 var current_state : FLAME_STATE = FLAME_STATE.IDLE
 
+func hit(damage: int) -> void:
 
+	if is_invincible == true:
+		return
+	health -= damage
+	print("Ouch! Health is now:", health)#DEBUG
+	
+	
+	
 func _physics_process(_delta):
 	player_transform = player_body_2d.transform # grab player's transform
 	distance_to_player = (transform.origin.distance_to(player_transform.origin)) # calculate distance from self to player
@@ -40,6 +51,5 @@ func _physics_process(_delta):
 			
 			if (distance_to_player > detection_range):
 				current_state = FLAME_STATE.IDLE
-	
 	velocity = move_direction * move_speed
 	move_and_slide()

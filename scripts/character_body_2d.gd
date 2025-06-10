@@ -1,13 +1,37 @@
 extends CharacterBody2D
 
-@export var move_speed : float = 100
+var health = 100
+var is_invincible = false
+@export var move_speed : float = 45 #speed
 @onready var animated_sprite = $AnimatedSprite2D
 
-enum Direction { LEFT, RIGHT, UP, DOWN}
+enum Direction { LEFT, RIGHT, UP, DOWN, SHIFT}
 var last_direction: Direction = Direction.DOWN
  
 var hat_equipped : bool = false # start no hat
 
+func hit(damage: int) -> void:
+	if is_invincible == true:
+		return
+	health -= damage
+	print("Ouch! Health is now:", health)#DEBUG
+	
+func dash(direction: Vector2, delta):
+	const dash_distance = 10
+	var my_location = transform.origin
+	var destination = my_location + direction*dash_distance
+	transform.origin = destination
+	
+func _process(delta):
+	if Input.is_action_just_pressed("attack"):
+		attempt_attack()
+
+func attempt_attack():
+	var enemies
+	for enemy in enemies:
+		if enemy.has_method("hit"):
+			enemy.hit(10)  # Deal 10 damage
+	
 func _physics_process(_delta):
 	#get input direction
 	var input_direction = Vector2(
@@ -16,7 +40,12 @@ func _physics_process(_delta):
 	).normalized()
 	#print(input_direction)
 	#NEW ANIMATIONS MUST TAKE PRIORITES OVER THESE IE HIT ANS DASH AND MAGIC
-	if !hat_equipped:
+	if Input.is_action_just_pressed("dash"):
+		dash(input_direction, _delta)
+		animated_sprite.play("Dash")
+		last_direction = Direction.SHIFT
+		
+	if !hat_equipped:#char picked up hat
 		if (input_direction.x > 0):
 			animated_sprite.play("Walk D")
 			last_direction = Direction.RIGHT
@@ -39,7 +68,7 @@ func _physics_process(_delta):
 					animated_sprite.play("Idle W")
 				Direction.DOWN:
 					animated_sprite.play("Idle S")
-	else:
+	else:#yet to find hat
 		if (input_direction.x > 0):
 			animated_sprite.play("Walk DH")
 			last_direction = Direction.RIGHT
@@ -62,7 +91,7 @@ func _physics_process(_delta):
 					animated_sprite.play("Idle WH")
 				Direction.DOWN:
 					animated_sprite.play("Idle SH")
-	
+
 	#update velocity
 	velocity = input_direction * move_speed
 	move_and_slide()

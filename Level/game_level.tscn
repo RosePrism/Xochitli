@@ -1,17 +1,17 @@
 [gd_scene load_steps=20 format=3 uid="uid://c8ohhpvskok07"]
 
-[ext_resource type="PackedScene" uid="uid://bqs21rdfddw2v" path="res://Characters/character_body_2d.tscn" id="1_xwc32"]
-[ext_resource type="Script" uid="uid://b7hrehge4c07o" path="res://Characters/character_body_2d.gd" id="2_lla2u"]
+[ext_resource type="PackedScene" uid="uid://bqs21rdfddw2v" path="res://Scenes/character_body_2d.tscn" id="1_xwc32"]
+[ext_resource type="Script" uid="uid://b7hrehge4c07o" path="res://scripts/character_body_2d.gd" id="2_lla2u"]
 [ext_resource type="Texture2D" uid="uid://5qhvud0bk07t" path="res://Assets/WizardFantasyNature/WizardFantasyNature/NatureTileMap.png" id="3_ck1n0"]
-[ext_resource type="PackedScene" uid="uid://dfpcb2up7kpcu" path="res://Characters/fire_enemy.tscn" id="3_def61"]
+[ext_resource type="PackedScene" uid="uid://dfpcb2up7kpcu" path="res://Scenes/fire_enemy.tscn" id="3_def61"]
 [ext_resource type="Texture2D" uid="uid://cwr4l83n6nwxa" path="res://Assets/WizardFantasyNature/WizardFantasyNature/BiomePropsShadow.png" id="4_3woxo"]
 [ext_resource type="Texture2D" uid="uid://d1iflbeskd25y" path="res://Assets/WizardFantasyNature/WizardFantasyNature/BiomeProps.png" id="5_nwuuu"]
 [ext_resource type="Texture2D" uid="uid://c1a7oufutslgr" path="res://Assets/WizardFantasyNature/WizardFantasyNature/CampingProps.png" id="6_def61"]
 [ext_resource type="Texture2D" uid="uid://btamey0oncp6n" path="res://Assets/MediavelFree.png/Water+.png" id="7_3woxo"]
 [ext_resource type="Texture2D" uid="uid://t1c58f2ak7of" path="res://Assets/WizardFantasyNature/WizardFantasyNature/Fire.png" id="7_x8oqm"]
-[ext_resource type="PackedScene" uid="uid://crldeuitaaav3" path="res://Scene/killzone.tscn" id="9_nwuuu"]
-[ext_resource type="PackedScene" uid="uid://cjm82dg8uj45e" path="res://Characters/health_potion.tscn" id="11_x8oqm"]
-[ext_resource type="PackedScene" uid="uid://v12pwm2l3rpu" path="res://Characters/hat.tscn" id="12_qd5bx"]
+[ext_resource type="PackedScene" uid="uid://crldeuitaaav3" path="res://Scenes/killzone.tscn" id="9_nwuuu"]
+[ext_resource type="PackedScene" uid="uid://cjm82dg8uj45e" path="res://Scenes/health_potion.tscn" id="11_x8oqm"]
+[ext_resource type="PackedScene" uid="uid://v12pwm2l3rpu" path="res://Scenes/hat.tscn" id="12_qd5bx"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qd5bx"]
 texture = ExtResource("3_ck1n0")
