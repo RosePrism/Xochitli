@@ -44,8 +44,7 @@ func _physics_process(_delta):
 		dash(input_direction, _delta)
 		animated_sprite.play("Dash")
 		last_direction = Direction.SHIFT
-		
-	if !hat_equipped:#char picked up hat
+	elif !hat_equipped:#char picked up hat
 		if (input_direction.x > 0):
 			animated_sprite.play("Walk D")
 			last_direction = Direction.RIGHT
