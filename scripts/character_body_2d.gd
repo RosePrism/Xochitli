@@ -10,23 +10,23 @@ var last_direction: Direction = Direction.DOWN
  
 var hat_equipped : bool = false # start no hat
 
-func hit(damage: int) -> void:
+func hit(damage: int) -> void:#health work in progress
 	if is_invincible == true:
 		return
 	health -= damage
 	print("Ouch! Health is now:", health)#DEBUG
 	
-func dash(direction: Vector2, delta):
-	const dash_distance = 10
+func dash(direction: Vector2, delta):#dash work in progress//fixing animation
+	const dash_distance = 35
 	var my_location = transform.origin
 	var destination = my_location + direction*dash_distance
 	transform.origin = destination
 	
-func _process(delta):
+func _process(delta):#to also be for attacks
 	if Input.is_action_just_pressed("attack"):
 		attempt_attack()
 
-func attempt_attack():
+func attempt_attack():#to be for attacks
 	var enemies
 	for enemy in enemies:
 		if enemy.has_method("hit"):
@@ -98,7 +98,7 @@ func _physics_process(_delta):
 #const SPEED = 300.0#og given code for movment, good for side scroller
 #const JUMP_VELOCITY = -400.0
 #
-#wasdw
+#w
 #func _physics_process(_delta):
 	## Add the gravity.
 	##if not is_on_floor():
@@ -118,7 +118,7 @@ func _physics_process(_delta):
 	#
 	#move_and_slide()
 	
-#func equip_hat():#maybe this for at idk yet
+#func equip_hat():#maybe this for at idk yet// not in use, save for backup
 	#var new_frames = preload("res://Sprites/PlayerWithHat.tres")
 	#animated_sprite.sprite_frames = new_frames
 	#animated_sprite.play("idle")
