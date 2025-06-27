@@ -1,8 +1,9 @@
-[gd_scene load_steps=76 format=3 uid="uid://bqs21rdfddw2v"]
+[gd_scene load_steps=80 format=3 uid="uid://bqs21rdfddw2v"]
 
 [ext_resource type="Texture2D" uid="uid://bsftd5i5mitvj" path="res://Assets/Xochitliwithhat2-Sheet.png" id="2_1sodm"]
 [ext_resource type="Texture2D" uid="uid://dekdiu4kc0i8q" path="res://Assets/XochitliNHV3-Sheet.png" id="2_4fmj6"]
 [ext_resource type="Texture2D" uid="uid://cor857htmtr7j" path="res://Assets/XochitliNH-Sheet.png" id="2_6ldss"]
+[ext_resource type="Texture2D" uid="uid://oxljpfdqfmtv" path="res://Assets/particle1.png" id="4_gbyq6"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wi7s4"]
 atlas = ExtResource("2_1sodm")
@@ -578,6 +579,24 @@ _data = {
 &"test": SubResource("Animation_6ldss")
 }
 
+[sub_resource type="Curve" id="Curve_pbq55"]
+_data = [Vector2(1e-05, 0.988764), 0.0, 0.0, 0, 0, Vector2(0.654412, 0.898876), -0.293863, -0.293863, 0, 0, Vector2(1, 0), 0.0, 1.4, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_t38ji"]
+curve = SubResource("Curve_pbq55")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_pbj7x"]
+lifetime_randomness = 0.75
+particle_flag_disable_z = true
+inherit_velocity_ratio = -0.01
+spread = 180.0
+initial_velocity_max = 30.77
+gravity = Vector3(0, 9, 0)
+alpha_curve = SubResource("CurveTexture_t38ji")
+hue_variation_min = -0.1
+hue_variation_max = 0.1
+
 [node name="CharacterBody2D" type="CharacterBody2D"]
 collision_layer = 2
 
@@ -602,3 +621,14 @@ parameters/Walk/blend_position = Vector2(0, 0)
 libraries = {
 &"": SubResource("AnimationLibrary_4fmj6")
 }
+
+[node name="PlayerParticles" type="GPUParticles2D" parent="."]
+show_behind_parent = true
+emitting = false
+amount = 50
+texture = ExtResource("4_gbyq6")
+one_shot = true
+speed_scale = 2.5
+explosiveness = 0.68
+randomness = 0.55
+process_material = SubResource("ParticleProcessMaterial_pbj7x")

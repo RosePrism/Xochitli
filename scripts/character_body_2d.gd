@@ -4,9 +4,11 @@ var health = 100
 var is_invincible = false
 @export var move_speed : float = 45 #speed
 @onready var animated_sprite = $AnimatedSprite2D
+@onready var player_particles: GPUParticles2D = $PlayerParticles
 
 enum Direction { LEFT, RIGHT, UP, DOWN, SHIFT}
 var last_direction: Direction = Direction.DOWN
+var last_direction_vector: Vector2 = Vector2.DOWN
  
 var hat_equipped : bool = false # start no hat
 
@@ -16,12 +18,29 @@ func hit(damage: int) -> void:#health work in progress
 	health -= damage
 	print("Ouch! Health is now:", health)#DEBUG
 	
+
+var is_dashing = false
+var dash_tween: Tween
+
 func dash(direction: Vector2, delta):#dash work in progress//fixing animation
+	if is_dashing:
+		return  # prevent overlapping dashes
+		
 	const dash_distance = 35
+	var dash_duration = 0.2
 	var my_location = transform.origin
 	var destination = my_location + direction*dash_distance
-	transform.origin = destination
+	#transform.origin = destination
+	emit_particles()
 	
+	var tween := create_tween()
+	await tween.tween_property(self, "global_position", destination, dash_duration).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT).finished
+	is_dashing = false
+
+func emit_particles():
+	#player_particles.direction = Vector2.LEFT
+	player_particles.restart()
+
 func _process(delta):#to also be for attacks
 	if Input.is_action_just_pressed("attack"):
 		attempt_attack()
@@ -41,22 +60,29 @@ func _physics_process(_delta):
 	#print(input_direction)
 	#NEW ANIMATIONS MUST TAKE PRIORITES OVER THESE IE HIT ANS DASH AND MAGIC
 	if Input.is_action_just_pressed("dash"):
-		dash(input_direction, _delta)
-		animated_sprite.play("Dash")
-		last_direction = Direction.SHIFT
+		if input_direction.length() < 0.1:
+			dash(last_direction_vector, _delta)
+		else:
+			dash(input_direction, _delta)
+		#animated_sprite.play("Dash")
+		#last_direction = Direction.SHIFT
 	elif !hat_equipped:#char picked up hat
 		if (input_direction.x > 0):
 			animated_sprite.play("Walk D")
 			last_direction = Direction.RIGHT
+			last_direction_vector = Vector2.RIGHT
 		elif (input_direction.x < 0):
 			animated_sprite.play("Walk A")
 			last_direction = Direction.LEFT
+			last_direction_vector = Vector2.LEFT
 		elif (input_direction.y < 0):
 			animated_sprite.play("Walk W")
 			last_direction = Direction.UP
+			last_direction_vector = Vector2.UP
 		elif (input_direction.y > 0):
 			animated_sprite.play("Walk S")
 			last_direction = Direction.DOWN
+			last_direction_vector = Vector2.DOWN
 		else:
 			match (last_direction):
 				Direction.LEFT:
@@ -71,15 +97,19 @@ func _physics_process(_delta):
 		if (input_direction.x > 0):
 			animated_sprite.play("Walk DH")
 			last_direction = Direction.RIGHT
+			last_direction_vector = Vector2.RIGHT
 		elif (input_direction.x < 0):
 			animated_sprite.play("Walk AH")
 			last_direction = Direction.LEFT
+			last_direction_vector = Vector2.LEFT
 		elif (input_direction.y < 0):
 			animated_sprite.play("Walk WH")
 			last_direction = Direction.UP
+			last_direction_vector = Vector2.UP
 		elif (input_direction.y > 0):
 			animated_sprite.play("Walk SH")
 			last_direction = Direction.DOWN
+			last_direction_vector = Vector2.DOWN
 		else:
 			match (last_direction):
 				Direction.LEFT:
